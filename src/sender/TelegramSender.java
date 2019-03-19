@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 
 public class TelegramSender {
+	private static boolean  avail = false;
 	private static String telegramBot;
 	private static String telegramChat;
 	static {
@@ -22,6 +23,7 @@ public class TelegramSender {
 			properties.load(inputProperties);
 			telegramBot = properties.getProperty("bot");
 			telegramChat = properties.getProperty("chat");
+			if (telegramBot != null & telegramChat != null) avail = true;
 			System.out.println("chat=" + telegramChat + "\nBot=" + telegramBot);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -32,6 +34,7 @@ public class TelegramSender {
 		sendMessage("line%0D%0Anew line");
 	}
 	public static synchronized void sendMessage(String msg) {
+		if (!avail) return;
 		String message = ("https://api.telegram.org/bot" + telegramBot + "/sendMessage?chat_id=" + telegramChat + "&text=" + msg).replaceAll(" ", "%20");
 		try {
 			URL url = new URL(message);

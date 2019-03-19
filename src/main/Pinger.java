@@ -109,7 +109,7 @@ public class Pinger implements Runnable {
 							"Lan address: " + labelLan.getText() + newLine + 
 							"Wan address: " + labelWan.getText() + newLine + 
 							"Address: " + comment);
-					else if (labelWan != null) sendMessage(
+					else sendMessage(
 							"Lost connection:" + newLine +
 							"Lan address: " + labelLan.getText() + newLine +
 							"Address: " + comment);
